@@ -1,0 +1,6 @@
+<h1>XSS from CSS</h1>
+<style type="text/css" media="screen">
+  body{
+   background-color: <%= params[:color] %>; 
+  }
+</style>

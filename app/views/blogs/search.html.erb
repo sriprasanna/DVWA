@@ -1,0 +1,5 @@
+<form action="/blogs/search" method="get" accept-charset="utf-8">
+  <label for="search">Search</label>
+  <%= text_field_tag "search", raw(params[:search]) %>
+  <p><input type="submit" value="Search"></p>
+</form>

