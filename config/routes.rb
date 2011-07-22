@@ -8,6 +8,7 @@ DVWA::Application.routes.draw do
       get :sqli
       get :json
       get :color
+      get :csrf
     end
   end
 

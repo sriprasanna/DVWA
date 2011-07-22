@@ -98,4 +98,5 @@ class BlogsController < ApplicationController
   def color
     
   end
+
 end
